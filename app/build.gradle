@@ -4,19 +4,35 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 android {
+    signingConfigs {
+        sashakozlovskiy {
+            storeFile file('C:\\visionSender')
+            storePassword '43083025'
+            keyAlias 'margaretmelnikova'
+            keyPassword '01101011'
+        }
+    }
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "ru.alexanderkozlovskiy.test"
+        applicationId "ru.alexandrkozlovskiy.KtIssue"
         minSdkVersion 16
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.sashakozlovskiy
     }
 
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.sashakozlovskiy
+        }
+    }
     compileOptions {
         sourceCompatibility JavaVersion.current()
         targetCompatibility JavaVersion.current()

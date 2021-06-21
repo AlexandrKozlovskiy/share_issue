@@ -1,11 +1,10 @@
-package ru.alexanderkozlovskiy.test
+package ru.alexandrkozlovskiy.KtIssue
 
 import android.app.Application
 import android.content.Intent
 import android.content.pm.PackageInfo
 import android.net.Uri
 import android.os.Build
-import android.os.StrictMode
 import java.io.ByteArrayOutputStream
 import java.io.PrintStream
 
@@ -30,7 +29,7 @@ p1.printStackTrace(PrintStream(outputStream))
             info+="thread ${p0.toString()} and problems are:\n${outputStream.toString()}"
 val i:Intent=Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:"))
             i.putExtra(Intent.EXTRA_EMAIL, arrayOf("k.sasha1994@yandex.ru"))
-i.putExtra(Intent.EXTRA_SUBJECT, "crash of test app")
+i.putExtra(Intent.EXTRA_SUBJECT, "crash of loader app")
             i.putExtra(Intent.EXTRA_TEXT, info)
 i.flags=Intent.FLAG_ACTIVITY_NEW_TASK
 try {
@@ -47,13 +46,9 @@ catch (e: Exception) {
     override fun onCreate() {
         super.onCreate()
 if(Thread.getDefaultUncaughtExceptionHandler() !is ExceptionCatcher) Thread.setDefaultUncaughtExceptionHandler(ExceptionCatcher(Thread.getDefaultUncaughtExceptionHandler()))
-        val builder = StrictMode.VmPolicy.Builder()
-        StrictMode.setVmPolicy(builder.build())
 }
-
 
     override fun onTerminate() {
         super.onTerminate()
-
     }
 }
